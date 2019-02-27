@@ -1,0 +1,40 @@
+spring:
+  cloud:
+    stream:
+      bindings:
+        signup-in:
+          destination: signup
+          contentType: application/json
+          binder: kafka-signup
+        signup-out:
+          destination: signup
+          contentType: application/json
+          binder: kafka-signup
+        email-in:
+          destination: email
+          contentType: application/json
+          binder: kafka-email
+        email-out:
+          destination: email
+          contentType: application/json
+          binder: kafka-email
+      binders:
+        kafka-signup:
+          type: kafka
+          environment:
+            spring:
+              cloud:
+                stream:
+                  kafka:
+                    binder:
+                      brokers: localhost:9092
+        kafka-email:
+          type: kafka
+          environment:
+            spring:
+              cloud:
+                stream:
+                  kafka:
+                    binder:
+                      brokers: localhost:9093
+                        
